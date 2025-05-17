@@ -24,9 +24,18 @@
       <div class="tag-btns" id="tag-btns"></div>
     </nav>
     <main class="main">
-      <section class="card-list" id="card-list"></section>
-      <div id="no-posts-msg" class="no-posts-msg" style="display:none;">포스트를 불러올 수 없습니다</div>
-      <button id="load-more" class="load-more-btn" style="display:none;">더보기</button>
+      <!-- 인기 게시물 섹션 -->
+      <section class="section popular-section">
+        <h2 class="section-title"><i class="fas fa-fire"></i> 인기 게시물</h2>
+        <div class="card-list" id="popular-list"></div>
+      </section>
+      <!-- 최신 게시물 섹션 -->
+      <section class="section latest-section">
+        <h2 class="section-title"><i class="fas fa-clock"></i> 최신 게시물</h2>
+        <div class="card-list" id="card-list"></div>
+        <div id="no-posts-msg" class="no-posts-msg" style="display:none;">포스트를 불러올 수 없습니다</div>
+        <button id="load-more" class="load-more-btn" style="display:none;">더보기</button>
+      </section>
     </main>
     <footer class="footer">
       <div class="footer-content">
