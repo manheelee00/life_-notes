@@ -4,58 +4,60 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="img/icon/favicon.svg" type="image/x-icon" />
-    <title>WENIVLOG</title>
+    <title>life_notes</title>
     <!-- Google Fonts: Poppins & Orbitron -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <!-- Main CSS -->
     <link rel="stylesheet" href="style/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   </head>
   <body>
-    <!-- Header -->
-    <header class="header">
-      <h1 class="blog-title glow-text">WENIVLOG</h1>
-    </header>
-    <!-- 검색창 -->
-    <div class="search-bar">
-      <input type="text" id="search-input" placeholder="검색어를 입력하세요 (제목, 카테고리, 설명)" autocomplete="off">
-    </div>
-    <!-- 카테고리 필터 버튼 영역 -->
-    <nav class="category-nav">
-      <div class="category-btns" id="category-btns">
-        <!-- JS로 버튼 생성 -->
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <h1 class="blog-title glow-text">life_notes</h1>
+      </header>
+      <!-- 검색창 -->
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="검색어를 입력하세요 (제목, 카테고리, 설명)" autocomplete="off">
       </div>
-    </nav>
-    <!-- 태그 필터 -->
-    <nav class="tag-nav">
-      <div class="tag-btns" id="tag-btns"></div>
-    </nav>
-    <!-- Main Section: Cards -->
-    <main class="main">
-      <section class="card-list" id="card-list">
-        <!-- JS로 카드 생성 -->
-      </section>
-      <div id="pagination" class="pagination"></div>
-    </main>
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-content">
-        <span>© 2024 WENIVLOG</span>
-        <div class="social-links">
-          <a href="#" class="social-link" aria-label="GitHub"><img src="img/github.svg" alt="GitHub"></a>
-          <a href="#" class="social-link" aria-label="Twitter"><img src="img/twitter.svg" alt="Twitter"></a>
-          <a href="#" class="social-link" aria-label="Email"><img src="img/email.svg" alt="Email"></a>
+      <!-- 카테고리 필터 버튼 영역 -->
+      <nav class="category-nav">
+        <div class="category-btns" id="category-btns">
+          <!-- JS로 버튼 생성 -->
         </div>
-      </div>
-    </footer>
-    <!-- 모달 팝업 구조 -->
-    <div id="modal" class="modal" tabindex="-1" aria-modal="true" style="display:none;">
-      <div class="modal-dim"></div>
-      <div class="modal-content">
-        <button id="modal-close" class="modal-close" aria-label="닫기">&times;</button>
-        <div id="modal-body"></div>
+      </nav>
+      <!-- 태그 필터 -->
+      <nav class="tag-nav">
+        <div class="tag-btns" id="tag-btns"></div>
+      </nav>
+      <!-- Main Section: Cards -->
+      <main class="main">
+        <section class="card-list" id="card-list"></section>
+        <div id="no-posts-msg" class="no-posts-msg" style="display:none;">게시글이 없습니다</div>
+        <div id="pagination" class="pagination"></div>
+      </main>
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <span>© 2024 life_notes</span>
+          <div class="social-links">
+            <a href="https://github.com/" class="social-link" aria-label="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://twitter.com/" class="social-link" aria-label="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="mailto:example@email.com" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </footer>
+      <!-- 모달 팝업 구조 -->
+      <div id="modal" class="modal" tabindex="-1" aria-modal="true" style="display:none;">
+        <div class="modal-dim"></div>
+        <div class="modal-content">
+          <button id="modal-close" class="modal-close" aria-label="닫기">&times;</button>
+          <div id="modal-body"></div>
+        </div>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="js/renderCards.js"></script>
+    <script src="js/render.js"></script>
   </body>
 </html>
