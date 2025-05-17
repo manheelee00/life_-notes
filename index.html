@@ -15,33 +15,26 @@
     <header class="header">
       <h1 class="blog-title glow-text">WENIVLOG</h1>
     </header>
-    <!-- Navigation -->
-    <nav class="nav">
-      <ul class="nav-list">
-        <li><a href="#" class="nav-link">Home</a></li>
-        <li><a href="#" class="nav-link">About</a></li>
-        <li><a href="#" class="nav-link">Blog</a></li>
-        <li><a href="#" class="nav-link">Contact</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
+    <!-- 검색창 -->
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="검색어를 입력하세요 (제목, 카테고리, 설명)" autocomplete="off">
+    </div>
+    <!-- 카테고리 필터 버튼 영역 -->
+    <nav class="category-nav">
+      <div class="category-btns" id="category-btns">
+        <!-- JS로 버튼 생성 -->
+      </div>
+    </nav>
+    <!-- 태그 필터 -->
+    <nav class="tag-nav">
+      <div class="tag-btns" id="tag-btns"></div>
     </nav>
     <!-- Main Section: Cards -->
     <main class="main">
-      <section class="card-list">
-        <!-- 예시 카드 1 -->
-        <article class="card">
-          <h2 class="card-title glow-text">뉴모피즘 & 글로우 카드</h2>
-          <p class="card-desc">이곳에 게시글 요약이 들어갑니다. 어두운 배경, 입체감, 글로우 효과가 조화를 이룹니다.</p>
-          <button class="card-btn">더보기</button>
-        </article>
-        <!-- 예시 카드 2 -->
-        <article class="card">
-          <h2 class="card-title glow-text">반응형 디자인</h2>
-          <p class="card-desc">모바일, 태블릿, 데스크탑에서 모두 최적화된 레이아웃을 제공합니다.</p>
-          <button class="card-btn">더보기</button>
-        </article>
-        <!-- 카드 추가 가능 -->
+      <section class="card-list" id="card-list">
+        <!-- JS로 카드 생성 -->
       </section>
+      <div id="pagination" class="pagination"></div>
     </main>
     <!-- Footer -->
     <footer class="footer">
@@ -54,6 +47,15 @@
         </div>
       </div>
     </footer>
-    <script src="js/nav.js"></script>
+    <!-- 모달 팝업 구조 -->
+    <div id="modal" class="modal" tabindex="-1" aria-modal="true" style="display:none;">
+      <div class="modal-dim"></div>
+      <div class="modal-content">
+        <button id="modal-close" class="modal-close" aria-label="닫기">&times;</button>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/renderCards.js"></script>
   </body>
 </html>

@@ -100,6 +100,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  animation: fadeInScale 0.7s cubic-bezier(.4,2,.6,1) both;
 }
 .card-title {
   font-size: 1.5rem;
@@ -200,4 +201,279 @@ body {
   .nav-toggle {
     display: block;
   }
+}
+
+/* =====================
+   카테고리 필터 버튼
+====================== */
+.category-nav {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 1.5rem 0;
+}
+.category-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.category-btn {
+  background: #181c24;
+  color: #00ffff;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 700;
+  box-shadow: 4px 4px 16px #0a0a0e, -4px -4px 16px #232a36;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  transition: box-shadow 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+}
+.category-btn.active, .category-btn:hover, .category-btn:focus {
+  background: #232a36;
+  color: #ff69b4;
+  box-shadow: 0 0 16px 4px #ff69b4, 0 0 32px 8px #00ffff;
+  transform: scale(1.08);
+}
+
+/* =====================
+   카드 썸네일
+====================== */
+.card-thumb {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 1.5rem 1.5rem 0 0;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 24px #0008;
+  background: #232a36;
+}
+
+/* =====================
+   카드 진입 애니메이션
+====================== */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =====================
+   카드 hover 확대
+====================== */
+.card:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 0 32px 8px #ff69b4, 0 0 48px 16px #00ffff;
+  z-index: 2;
+}
+
+/* =====================
+   카드 카테고리 표시
+====================== */
+.card-category {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.2em 1em;
+  background: #232a36;
+  color: #00ffff;
+  border-radius: 1em;
+  font-size: 0.9em;
+  font-weight: 700;
+}
+
+/* =====================
+   모달 팝업 스타일
+====================== */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.modal[style*="display: block"] {
+  pointer-events: auto;
+}
+.modal-dim {
+  position: absolute;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(13,13,13,0.85);
+  backdrop-filter: blur(2px);
+  animation: modalDimFade 0.3s;
+}
+@keyframes modalDimFade {
+  from { opacity: 0; } to { opacity: 1; }
+}
+.modal-content {
+  position: relative;
+  z-index: 1;
+  background: #181c24;
+  color: #f0f0f0;
+  border-radius: 2rem;
+  box-shadow: 8px 8px 32px #0a0a0e, -8px -8px 32px #232a36, 0 0 32px 8px #00ffff44;
+  padding: 2.5rem 2rem 2rem 2rem;
+  min-width: 320px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: modalPopFade 0.4s cubic-bezier(.4,2,.6,1);
+}
+@keyframes modalPopFade {
+  0% { opacity: 0; transform: scale(0.92) translateY(40px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  text-shadow: 0 0 8px #fff, 0 0 16px #00ffff;
+  transition: color 0.2s;
+}
+.modal-close:hover, .modal-close:focus {
+  color: #ff69b4;
+}
+#modal-body {
+  font-family: 'Poppins', Arial, sans-serif;
+  margin-top: 1.5rem;
+  color: #f0f0f0;
+  word-break: break-word;
+}
+/* 모달 내 마크다운 스타일 일부 */
+#modal-body h1, #modal-body h2, #modal-body h3 {
+  color: #fff;
+  text-shadow: 0 0 8px #fff, 0 0 16px #00ffff;
+}
+#modal-body img {
+  max-width: 100%;
+  border-radius: 1rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 24px #0008;
+}
+
+/* 모달 스크롤락 */
+body.modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 700px) {
+  .modal-content {
+    max-width: 95vw;
+    padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+  }
+}
+
+/* =====================
+   검색창 스타일
+====================== */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 0.5rem 0;
+}
+#search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.7rem 1.2rem;
+  border-radius: 1.5rem;
+  border: none;
+  background: #181c24;
+  color: #f0f0f0;
+  font-size: 1.1rem;
+  font-family: 'Poppins', Arial, sans-serif;
+  box-shadow: 2px 2px 12px #0a0a0e, -2px -2px 12px #232a36;
+  outline: none;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+#search-input:focus {
+  background: #232a36;
+  box-shadow: 0 0 16px 4px #00ffff, 0 0 32px 8px #ff69b4;
+}
+
+/* =====================
+   태그 필터 버튼
+====================== */
+.tag-nav {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0 1.5rem 0;
+}
+.tag-btns {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+.tag-btn {
+  background: #232a36;
+  color: #ff69b4;
+  border: none;
+  border-radius: 1.2rem;
+  padding: 0.35rem 1.1rem;
+  font-size: 0.98rem;
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 700;
+  box-shadow: 2px 2px 10px #0a0a0e, -2px -2px 10px #232a36;
+  cursor: pointer;
+  margin-bottom: 0.3rem;
+  transition: box-shadow 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+}
+.tag-btn.active, .tag-btn:hover, .tag-btn:focus {
+  background: #181c24;
+  color: #00ffff;
+  box-shadow: 0 0 12px 2px #00ffff, 0 0 24px 4px #ff69b4;
+  transform: scale(1.08);
+}
+
+/* =====================
+   페이지네이션
+====================== */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 2.5rem 0 1.5rem 0;
+  flex-wrap: wrap;
+}
+.pagination-btn {
+  background: #181c24;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 1.2rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 1rem;
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 700;
+  box-shadow: 2px 2px 10px #0a0a0e, -2px -2px 10px #232a36;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+}
+.pagination-btn.active, .pagination-btn:hover, .pagination-btn:focus {
+  background: #00ffff;
+  color: #181c24;
+  box-shadow: 0 0 16px 4px #ff69b4, 0 0 32px 8px #00ffff;
+  transform: scale(1.12);
+}
+
+/* =====================
+   검색어 하이라이팅
+====================== */
+mark {
+  background: #00ffff44;
+  color: #ff69b4;
+  font-weight: bold;
+  border-radius: 0.3em;
+  padding: 0 0.2em;
+  box-shadow: 0 0 8px #00ffff, 0 0 16px #ff69b4;
 } 
