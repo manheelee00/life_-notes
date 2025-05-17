@@ -1,0 +1,203 @@
+/* =====================
+   Google Fonts 적용
+====================== */
+body {
+  font-family: 'Poppins', 'Orbitron', Arial, sans-serif;
+  background: #0d0d0d;
+  color: #f0f0f0;
+  margin: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* =====================
+   Glow 효과 (글자)
+====================== */
+.glow-text {
+  color: #fff;
+  text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 32px #fff3;
+}
+
+/* =====================
+   Header
+====================== */
+.header {
+  padding: 2rem 1rem 1rem 1rem;
+  text-align: center;
+  background: transparent;
+}
+.blog-title {
+  font-family: 'Orbitron', 'Poppins', Arial, sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+/* =====================
+   Navigation (Nav)
+====================== */
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #181818;
+  box-shadow: 0 2px 16px #000a;
+  position: relative;
+}
+.nav-list {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-link {
+  color: #f0f0f0;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  transition: background 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.nav-link:hover, .nav-link:focus {
+  background: #232323;
+  box-shadow: 0 0 8px #ff69b4, 0 0 16px #00ffff;
+  color: #fff;
+}
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #f0f0f0;
+  font-size: 2rem;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+/* =====================
+   Main Section & Cards
+====================== */
+.main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+.card {
+  background: #181c24;
+  border-radius: 2rem;
+  box-shadow: 8px 8px 24px #0a0a0e, -8px -8px 24px #232a36;
+  padding: 2rem 1.5rem;
+  transition: box-shadow 0.3s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.card-title {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+  font-family: 'Orbitron', 'Poppins', Arial, sans-serif;
+}
+.card-desc {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #e0e0e0;
+}
+.card-btn {
+  background: #232a36;
+  color: #fff;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0.7rem 2rem;
+  font-size: 1rem;
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 700;
+  box-shadow: 4px 4px 16px #0a0a0e, -4px -4px 16px #232a36;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+}
+.card-btn:hover, .card-btn:focus {
+  box-shadow: 0 0 16px 4px #ff69b4, 0 0 32px 8px #00ffff;
+  background: #181c24;
+  color: #fff;
+}
+
+/* =====================
+   Footer
+====================== */
+.footer {
+  background: #181818;
+  color: #f0f0f0;
+  padding: 2rem 1rem 1rem 1rem;
+  text-align: center;
+  box-shadow: 0 -2px 16px #000a;
+}
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.social-links {
+  display: flex;
+  gap: 1.5rem;
+}
+.social-link img {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 0 8px #fff8);
+  transition: filter 0.2s;
+}
+.social-link:hover img, .social-link:focus img {
+  filter: drop-shadow(0 0 16px #ff69b4) drop-shadow(0 0 24px #00ffff);
+}
+
+/* =====================
+   반응형 (Responsive)
+====================== */
+@media (max-width: 900px) {
+  .card-list {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .header {
+    padding: 1.2rem 0.5rem 0.5rem 0.5rem;
+  }
+  .blog-title {
+    font-size: 1.5rem;
+  }
+  .main {
+    padding: 0 0.5rem;
+  }
+  .card {
+    padding: 1.2rem 0.7rem;
+  }
+  .nav-list {
+    flex-direction: column;
+    gap: 0.5rem;
+    background: #181818;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    z-index: 10;
+    border-radius: 0 0 1.5rem 1.5rem;
+    box-shadow: 0 8px 24px #000a;
+  }
+  .nav-list.active {
+    display: flex;
+  }
+  .nav-toggle {
+    display: block;
+  }
+} 
