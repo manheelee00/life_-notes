@@ -134,13 +134,17 @@ document.getElementById('card-list').addEventListener('click', async function(e)
 
 // Step 2: 검색, 태그, 페이지네이션 기능 추가
 
-// 상태 변수
+// =====================
+// 전역 상태 변수 (중복 선언 방지)
+// =====================
 let _postMetas = [];
 let _currentCategory = "전체";
-let _currentTag = null;
+let _currentTags = new Set();
 let _searchKeyword = "";
 let _currentPage = 1;
 const PAGE_SIZE = 6;
+let _infiniteScrollEnabled = true;
+let _observer = null;
 
 // 태그 목록 추출
 function getAllTags(postMetas) {
@@ -175,10 +179,10 @@ function renderTagBtns(tags) {
   const tagBtnsDiv = document.getElementById('tag-btns');
   tagBtnsDiv.innerHTML = '';
   const allBtn = document.createElement('button');
-  allBtn.className = 'tag-btn' + (!_currentTag ? ' active' : '');
+  allBtn.className = 'tag-btn' + (!_currentTags.size ? ' active' : '');
   allBtn.textContent = '전체';
   allBtn.onclick = () => {
-    _currentTag = null;
+    _currentTags.clear();
     document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
     allBtn.classList.add('active');
     _currentPage = 1;
@@ -187,12 +191,14 @@ function renderTagBtns(tags) {
   tagBtnsDiv.appendChild(allBtn);
   tags.forEach(tag => {
     const btn = document.createElement('button');
-    btn.className = 'tag-btn' + (tag === _currentTag ? ' active' : '');
+    btn.className = 'tag-btn' + (_currentTags.has(tag) ? ' active' : '');
     btn.textContent = tag;
     btn.onclick = () => {
-      _currentTag = tag;
-      document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      if (_currentTags.has(tag)) {
+        _currentTags.delete(tag);
+      } else {
+        _currentTags.add(tag);
+      }
       _currentPage = 1;
       renderCards();
     };
@@ -217,8 +223,8 @@ function renderCards() {
   if (_currentCategory !== "전체") {
     filtered = filtered.filter(meta => meta.category === _currentCategory);
   }
-  if (_currentTag) {
-    filtered = filtered.filter(meta => Array.isArray(meta.tags) && meta.tags.includes(_currentTag));
+  if (_currentTags.size > 0) {
+    filtered = filtered.filter(meta => Array.isArray(meta.tags) && [..._currentTags].every(t => meta.tags.includes(t)));
   }
   if (_searchKeyword) {
     filtered = filtered.filter(meta =>
@@ -290,13 +296,12 @@ document.getElementById('card-list').addEventListener('click', async function(e)
   // 태그 클릭 시 태그 필터 적용
   const tagSpan = e.target.closest('.tag-btn');
   if (tagSpan && !tagSpan.classList.contains('card-btn')) {
-    _currentTag = tagSpan.textContent.replace(/^#/, '');
-    document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
-    // 상단 태그 버튼도 active 처리
-    document.querySelectorAll('.tag-btns .tag-btn').forEach(b => {
-      if (b.textContent === _currentTag) b.classList.add('active');
-    });
-    _currentPage = 1;
+    const tag = tagSpan.textContent.replace(/^#/, '');
+    if (_currentTags.has(tag)) {
+      _currentTags.delete(tag);
+    } else {
+      _currentTags.add(tag);
+    }
     renderCards();
   }
 });
@@ -334,39 +339,8 @@ function markHighlight(text, keyword) {
 }
 
 // =====================
-// 🏷 다중 태그 필터 (AND)
-// =====================
-let _currentTags = new Set(); // 여러 태그 선택 가능
-
-// 태그 버튼 렌더링 (toggle, AND)
-function renderTagBtns(tags) {
-  const tagBtnsDiv = document.getElementById('tag-btns');
-  tagBtnsDiv.innerHTML = '';
-  tags.forEach(tag => {
-    const btn = document.createElement('button');
-    btn.className = 'tag-btn' + (_currentTags.has(tag) ? ' active' : '');
-    btn.textContent = tag;
-    btn.onclick = () => {
-      if (_currentTags.has(tag)) {
-        _currentTags.delete(tag);
-      } else {
-        _currentTags.add(tag);
-      }
-      _currentPage = 1;
-      renderCards();
-    };
-    tagBtnsDiv.appendChild(btn);
-  });
-}
-
-// =====================
 // 📄 무한 스크롤 페이지네이션
 // =====================
-let _currentPage = 1;
-const PAGE_SIZE = 6;
-let _infiniteScrollEnabled = true;
-let _observer = null;
-
 function setupInfiniteScroll() {
   if (_observer) _observer.disconnect();
   const sentinel = document.createElement('div');
@@ -448,7 +422,6 @@ function renderCards(reset = true) {
 // =====================
 // 검색 입력 이벤트 (대소문자 구분 없이)
 // =====================
-const searchInput = document.getElementById('search-input');
 searchInput.addEventListener('input', function(e) {
   _searchKeyword = e.target.value.trim().toLowerCase();
   renderCards();
